@@ -1,0 +1,33 @@
+<section>
+    <h2>Serviços</h2>
+
+    <div *ngFor="let servico of servicos">
+        <h3>{{ servico.titulo }}</h3>
+
+        <p>{{ servico.descricao }}</p>
+
+        <p>
+            <strong>Prestador:</strong> {{ servico.prestadorNome }}
+        </p>
+
+        <p>
+            <strong>Preço base:</strong> {{ servico.precoBase | currency:'BRL' }}
+        </p>
+
+        <p>
+            <strong>Status:</strong> {{ servico.disponivel ? 'Disponível' : 'Indisponível' }}
+        </p>
+
+        <p *ngIf="servico.categorias.length">
+            <strong>Categorias:</strong>
+            <span *ngFor="let c of servico.categorias; let last = last">
+                {{ c.nome }} <span *ngIf="!last">, </span>
+            </span>
+        </p>
+
+        <small>
+            Criado em: {{ servico.dataCriacao | date:'short' }}
+        </small>
+
+    </div>
+</section>

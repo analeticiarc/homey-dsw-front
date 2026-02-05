@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 export class Login {
   email = '';
   password = '';
+  token?: string;
   errorMessage = '';
   successMessage = '';
 
@@ -25,8 +26,9 @@ export class Login {
         password: this.password
       });
       if (response.status === 200) {
-        this.successMessage = 'Login realizado com sucesso!';
-        // Redirecionar ou salvar token, se necessário
+        this.successMessage = 'Login realizado com sucesso!'; 
+        this.token = response.data.token;
+        axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
       } else {
         this.errorMessage = 'Falha no login. Verifique suas credenciais.';
       }

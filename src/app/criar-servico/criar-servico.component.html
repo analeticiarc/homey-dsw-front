@@ -1,0 +1,37 @@
+<h2>
+    Criar Serviço
+</h2>
+
+<form (submit)="CriarServico();$event.preventDefault()">
+    <input 
+        type="text"
+        placeholder="Título"
+        [(ngModel)]="titulo"
+        name="titulo"
+        required
+    >
+
+    <textarea
+        placeholder="Descrição"
+        [(ngModel)]="descricao"
+        name="descricao"
+    ></textarea>
+
+    <input 
+        type="number" 
+        placeholder="Preço base" 
+        [(ngModel)]="precoBase"
+        name="precoBase"
+        step="0.01"
+        required
+    >
+
+    <label>
+        <input type="checkbox" [(ngModel)]="disponivel" name="disponivel"> 
+        Disponível       
+    </label>
+
+    <button type="submit">Criar</button>
+
+    <p *ngIf="erro" style="color: red;">{{ erro }}</p>
+</form>
