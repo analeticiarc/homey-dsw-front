@@ -1,0 +1,99 @@
+:host {
+	display: block;
+}
+
+.servico-page {
+	max-width: 960px;
+	margin: 2rem auto;
+	padding: 0 1rem 2rem;
+}
+
+.servico-title {
+	margin: 0 0 1.5rem;
+	font-size: 1.7rem;
+	font-weight: 600;
+	color: var(--color-primary);
+	border-bottom: 1px solid var(--color-border);
+	padding-bottom: 0.5rem;
+}
+
+.servico-empty {
+	color: var(--color-text-muted);
+	font-style: italic;
+}
+
+.servico-debug {
+	margin-top: 0.75rem;
+	padding: 0.75rem;
+	border-radius: 0.5rem;
+	border: 1px dashed var(--color-border);
+	background-color: var(--color-bg-alt);
+	font-size: 0.8rem;
+	color: var(--color-text-muted);
+}
+
+.servico-list {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	margin-top: 0.75rem;
+}
+
+.servico-card {
+	background-color: var(--color-surface);
+	border-radius: 0.75rem;
+	border: 1px solid var(--color-border);
+	box-shadow: var(--color-shadow-soft);
+	padding: 1.25rem 1.5rem;
+}
+
+.servico-card__title {
+	margin: 0 0 0.6rem;
+	font-size: 1.15rem;
+	font-weight: 600;
+	color: var(--color-primary-dark);
+}
+
+.servico-card__descricao {
+	margin: 0 0 0.75rem;
+	color: var(--color-text);
+}
+
+.servico-card__info {
+	margin: 0.1rem 0;
+	color: var(--color-text);
+	font-size: 0.95rem;
+}
+
+.servico-card__info strong {
+	color: var(--color-text-muted);
+}
+
+.servico-categorias {
+	margin: 0.75rem 0 0.5rem;
+	font-size: 0.9rem;
+}
+
+.servico-categorias strong {
+	color: var(--color-text-muted);
+	margin-right: 0.35rem;
+}
+
+.servico-categoria {
+	display: inline-block;
+	margin-right: 0.35rem;
+	margin-top: 0.25rem;
+	padding: 0.15rem 0.5rem;
+	border-radius: 999px;
+	background-color: var(--color-bg-alt);
+	border: 1px solid var(--color-border);
+	font-size: 0.8rem;
+	color: var(--color-text-muted);
+}
+
+.servico-meta {
+	display: block;
+	margin-top: 0.8rem;
+	font-size: 0.8rem;
+	color: var(--color-text-muted);
+}
