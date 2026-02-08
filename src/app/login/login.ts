@@ -1,13 +1,15 @@
 
 import { Component, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import axios from 'axios';
 
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
-  templateUrl: './login.html',
+  imports: [CommonModule, FormsModule],
+  templateUrl: './login.component.html',
   styleUrl: './login.css',
 })
 export class Login {
@@ -17,18 +19,29 @@ export class Login {
   errorMessage = '';
   successMessage = '';
 
+  constructor(private router: Router) {}
+
   async onSubmit() {
     this.errorMessage = '';
     this.successMessage = '';
     try {
-      const response = await axios.post('/login', {
+      const response = await axios.post('http://localhost:8080/autenticacao/login', {
         email: this.email,
         password: this.password
       });
       if (response.status === 200) {
         this.successMessage = 'Login realizado com sucesso!'; 
         this.token = response.data.token;
-        axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
+        // Salva o token para o interceptor em services/api.ts conseguir enviar nas próximas requisições
+        if (this.token) {
+          localStorage.setItem('token', this.token);
+        }
+        if (response.data?.usuario?.tipo === 'PRESTADOR') {
+          this.router.navigate(['/servicos']);
+        } else {
+          this.router.navigate(['/']);
+        }
+        
       } else {
         this.errorMessage = 'Falha no login. Verifique suas credenciais.';
       }

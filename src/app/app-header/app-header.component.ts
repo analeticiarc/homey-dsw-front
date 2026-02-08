@@ -1,10 +1,11 @@
 import { Component } from "@angular/core";
 import { RouterModule } from "@angular/router";
 
-@CompositionEvent({
+@Component({
     selector: 'app-header',
     standalone: true,
     imports: [RouterModule],
-    templateUrl: './app-header.component.html'
+    templateUrl: './app-header.component.html',
+    styleUrl: './app-header.css'
 })
 export class AppHeaderComponent {}

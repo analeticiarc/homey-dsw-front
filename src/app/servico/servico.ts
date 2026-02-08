@@ -1,5 +1,6 @@
+import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import axios from "axios";
+import api from "../services/api";
 
 interface CategoriaResponseDTO {
     id: number;
@@ -21,6 +22,9 @@ interface ServicoResponseDTO {
 @Component({
     selector: 'app-servicos',
     templateUrl: './servico.component.html',
+    standalone: true,
+    imports: [CommonModule],
+    styleUrl: './servico.css'
 })
 export class Servico implements OnInit {
     servicos: ServicoResponseDTO[] = [];
@@ -31,8 +35,10 @@ export class Servico implements OnInit {
 
     async carregarServicos() {
         try {
-            const response = await axios.get<ServicoResponseDTO>('/servicos');
-            this.servicos = response.data;
+            const response = await api.get<ServicoResponseDTO[]>('/servicos');
+            this.servicos = response.data as any;
+            console.log('Resposta /servicos:', response.data);
+            console.log('Servicos no componente:', this.servicos);
         } catch (err) {
             console.error('Erro ao carregar serviços', err);
         }

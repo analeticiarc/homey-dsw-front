@@ -1,37 +1,66 @@
-<h2>
-    Criar Serviço
-</h2>
+<div class="criar-servico-page">
+    <section class="criar-servico-card">
+        <h2 class="criar-servico-title">Criar serviço</h2>
 
-<form (submit)="CriarServico();$event.preventDefault()">
-    <input 
-        type="text"
-        placeholder="Título"
-        [(ngModel)]="titulo"
-        name="titulo"
-        required
-    >
+        <form (submit)="criarServico(); $event.preventDefault()" class="criar-servico-form">
+            <div class="criar-servico-field">
+                <label for="titulo">Título</label>
+                <input
+                    id="titulo"
+                    type="text"
+                    placeholder="Ex: Limpeza residencial"
+                    [(ngModel)]="titulo"
+                    name="titulo"
+                    required
+                />
+            </div>
 
-    <textarea
-        placeholder="Descrição"
-        [(ngModel)]="descricao"
-        name="descricao"
-    ></textarea>
+            <div class="criar-servico-field">
+                <label for="descricao">Descrição</label>
+                <textarea
+                    id="descricao"
+                    placeholder="Detalhe o serviço oferecido"
+                    [(ngModel)]="descricao"
+                    name="descricao"
+                ></textarea>
+            </div>
 
-    <input 
-        type="number" 
-        placeholder="Preço base" 
-        [(ngModel)]="precoBase"
-        name="precoBase"
-        step="0.01"
-        required
-    >
+            <div class="criar-servico-field">
+                <label for="precoBase">Preço base (R$)</label>
+                <input
+                    id="precoBase"
+                    type="number"
+                    placeholder="0,00"
+                    [(ngModel)]="precoBase"
+                    name="precoBase"
+                    step="0.01"
+                    required
+                />
+            </div>
 
-    <label>
-        <input type="checkbox" [(ngModel)]="disponivel" name="disponivel"> 
-        Disponível       
-    </label>
+            <div class="criar-servico-field">
+                <label for="categorias">Categorias (separadas por vírgula)</label>
+                <input
+                    id="categorias"
+                    type="text"
+                    placeholder="Ex: Limpeza, Residencial, Diária"
+                    [(ngModel)]="categoriasTexto"
+                    name="categorias"
+                />
+            </div>
 
-    <button type="submit">Criar</button>
+            <div class="criar-servico-field criar-servico-field--inline">
+                <label class="criar-servico-toggle">
+                    <input type="checkbox" [(ngModel)]="disponivel" name="disponivel" />
+                    <span>Disponível para contratação</span>
+                </label>
+            </div>
 
-    <p *ngIf="erro" style="color: red;">{{ erro }}</p>
-</form>
+            <button type="submit" class="criar-servico-button">Criar serviço</button>
+
+            <p *ngIf="erro" class="criar-servico-message criar-servico-message--error">
+                {{ erro }}
+            </p>
+        </form>
+    </section>
+</div>

@@ -1,33 +1,44 @@
-<section>
-    <h2>Serviços</h2>
+<section class="servico-page">
+    <h2 class="servico-title">Serviços</h2>
 
-    <div *ngFor="let servico of servicos">
-        <h3>{{ servico.titulo }}</h3>
+    @if (servicos.length === 0) {
+        <p class="servico-empty">Nenhum serviço encontrado.</p>
+        <!-- Debug opcional: mostra o JSON retornado -->
+        <pre class="servico-debug">{{ servicos | json }}</pre>
+    } @else {
+        <div class="servico-list">
+            @for (servico of servicos; track servico.id) {
+                <article class="servico-card">
+                    <h3 class="servico-card__title">{{ servico.titulo }}</h3>
 
-        <p>{{ servico.descricao }}</p>
+                    <p class="servico-card__descricao">{{ servico.descricao }}</p>
 
-        <p>
-            <strong>Prestador:</strong> {{ servico.prestadorNome }}
-        </p>
+                    <p class="servico-card__info">
+                        <strong>Prestador:</strong> {{ servico.prestadorNome }}
+                    </p>
 
-        <p>
-            <strong>Preço base:</strong> {{ servico.precoBase | currency:'BRL' }}
-        </p>
+                    <p class="servico-card__info">
+                        <strong>Preço base:</strong> {{ servico.precoBase | currency:'BRL' }}
+                    </p>
 
-        <p>
-            <strong>Status:</strong> {{ servico.disponivel ? 'Disponível' : 'Indisponível' }}
-        </p>
+                    <p class="servico-card__info">
+                        <strong>Status:</strong> {{ servico.disponivel ? 'Disponível' : 'Indisponível' }}
+                    </p>
 
-        <p *ngIf="servico.categorias.length">
-            <strong>Categorias:</strong>
-            <span *ngFor="let c of servico.categorias; let last = last">
-                {{ c.nome }} <span *ngIf="!last">, </span>
-            </span>
-        </p>
+                    @if (servico.categorias?.length) {
+                        <p class="servico-categorias">
+                            <strong>Categorias:</strong>
+                            @for (c of servico.categorias; track c.id) {
+                                <span class="servico-categoria">{{ c.nome }}</span>
+                            }
+                        </p>
+                    }
 
-        <small>
-            Criado em: {{ servico.dataCriacao | date:'short' }}
-        </small>
-
-    </div>
+                    <small class="servico-meta">
+                        Criado em: {{ servico.dataCriacao | date:'short' }}
+                    </small>
+                </article>
+            }
+        </div>
+    }
 </section>

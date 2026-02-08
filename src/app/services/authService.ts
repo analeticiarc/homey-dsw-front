@@ -8,7 +8,7 @@ const anonymousApi = axios.create({
   }
 });
 
-export async function login(email, password) {
+export async function login(email: string, password: string) {
   try {
     const response = await api.post('/Auth/login', { email, password });
     
@@ -23,7 +23,7 @@ export async function login(email, password) {
   }
 }
 
-export async function login_admin(email, password){
+export async function login_admin(email: string, password: string){
   try {
     const response = await api.post('/Auth/login-admin', { email, password });
 
@@ -38,11 +38,11 @@ export async function login_admin(email, password){
   }
 }
 
-export async function register(name, email, password, phone, cpf) {
+export async function register(name: string, email: string, password: string, phone: string, cpf: string) {
   try {
     const response = await api.post('/Auth/register', { name, email, password, phone, cpf });
     return response.data;
-  } catch (error) {
+  } catch (error: any) {
     console.error('Erro no registro:', error);
     
     if (error.response) {
@@ -60,7 +60,7 @@ export async function register(name, email, password, phone, cpf) {
 }
 
 
-export async function forgotPassword(email) {
+export async function forgotPassword(email: string) {
   try {
     
     const response = await anonymousApi.post('/Auth/forgot-password', { email });
@@ -76,7 +76,7 @@ export async function forgotPassword(email) {
   }
 }
 
-export async function resetPasswordLoggedUser(currentPassword, newPassword) {
+export async function resetPasswordLoggedUser(currentPassword: string, newPassword: string) {
   try {
     const response = await api.post('/Auth/change-password', {
       oldPassword: currentPassword,
@@ -90,7 +90,7 @@ export async function resetPasswordLoggedUser(currentPassword, newPassword) {
   }
 }
 
-export async function resetPasswordWithCode(email, code, newPassword) {
+export async function resetPasswordWithCode(email: string, code: string, newPassword: string) {
   try {
     console.log('Tentando resetar senha com:', { email, code, newPassword });
     
@@ -101,7 +101,7 @@ export async function resetPasswordWithCode(email, code, newPassword) {
     });
     console.log('Senha resetada com código:', response.data);
     return response.data;
-  } catch (error) {
+  } catch (error: any) {
     console.error('Erro ao resetar senha com código:', error);
     console.error('Detalhes do erro:', {
       status: error.response?.status,
@@ -118,7 +118,7 @@ export async function resetPasswordWithCode(email, code, newPassword) {
   }
 }
 
-export async function resetPasswordWithToken(token, newPassword) {
+export async function resetPasswordWithToken(token: string, newPassword: string) {
   try {
     // Usar anonymousApi para não incluir token de autorização
     const response = await anonymousApi.post('/Auth/reset-password-with-token', {

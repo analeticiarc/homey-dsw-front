@@ -1,6 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import axios from "axios";
 import { Router } from "@angular/router";
+import { FormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
+import api from "../services/api";
 
 interface CriarServicoDTO {
     titulo: string;
@@ -12,7 +15,9 @@ interface CriarServicoDTO {
 
 @Component({
     selector: 'app-servicos',
-    templateUrl: './servico.component.html',
+    templateUrl: './criar-servico.component.html',
+    imports: [CommonModule, FormsModule],
+    styleUrl: './criar-servico.css'
 })
 export class CriarServico {
     titulo = '';
@@ -34,7 +39,7 @@ export class CriarServico {
         }
 
         try {
-            await axios.post('/servicos', payload)
+            await api.post('/servicos', payload)
 
             this.router.navigate(['/servicos']);
         } catch (error: any) {
