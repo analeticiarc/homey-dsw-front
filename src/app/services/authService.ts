@@ -11,26 +11,36 @@ const anonymousApi = axios.create({
 export async function login(email: string, password: string) {
   try {
     const response = await api.post('/Auth/login', { email, password });
-    
-    const { token } = response.data;
+
+    const { token, usuario } = response.data;
     if (token) {
       localStorage.setItem('token', token);
     }
-    return response.data; 
+
+    if (usuario) {
+      localStorage.setItem('user', JSON.stringify(usuario));
+    }
+
+    return response.data;
   } catch (error) {
     console.error('Erro ao fazer login:', error);
     throw error;
   }
 }
 
-export async function login_admin(email: string, password: string){
+export async function login_admin(email: string, password: string) {
   try {
     const response = await api.post('/Auth/login-admin', { email, password });
 
-    const { token } = response.data;
+    const { token, usuario } = response.data;
     if (token) {
       localStorage.setItem('token', token);
     }
+
+    if (usuario) {
+      localStorage.setItem('user', JSON.stringify(usuario));
+    }
+
     return response.data;
   } catch (error) {
     console.error('Erro ao fazer login admin:', error);
@@ -170,6 +180,24 @@ export function isAuthenticated() {
 
 // OBTER DADOS DO TOKEN: extrai informações do JWT
 export function getUserFromToken() {
+  const storedUser = localStorage.getItem('user');
+  if (storedUser) {
+    try {
+      const usuario = JSON.parse(storedUser);
+      return {
+        id: usuario.id,
+        email: usuario.email,
+        name: usuario.nome || usuario.name,
+        roles: usuario.roles || usuario.role || [],
+        tipo: usuario.tipo,
+        exp: null,
+      };
+    } catch (error) {
+      console.error('Erro ao ler usuário do localStorage:', error);
+      localStorage.removeItem('user');
+    }
+  }
+
   const token = localStorage.getItem('token');
   if (!token) return null;
   

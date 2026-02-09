@@ -24,11 +24,20 @@
 		<button type="submit" class="login-button">
 			Entrar
 		</button>
-		<div *ngIf="errorMessage" class="login-message login-message--error">
-			{{ errorMessage }}
-		</div>
-		<div *ngIf="successMessage" class="login-message login-message--success">
-			{{ successMessage }}
+		@if (errorMessage) {
+			<div class="login-message login-message--error">
+				{{ errorMessage }}
+			</div>
+		} @else if (successMessage) {
+			<div class="login-message login-message--success">
+				{{ successMessage }}
+			</div>
+		}
+		<div class="login-message">
+			Não tem conta?
+			<a routerLink="/registro-cliente">Cadastre-se como cliente</a>
+			ou
+			<a routerLink="/registro-prestador">Cadastre-se como prestador</a>
 		</div>
 	</form>
 </div>

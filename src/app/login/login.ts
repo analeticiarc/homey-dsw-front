@@ -36,6 +36,9 @@ export class Login {
         if (this.token) {
           localStorage.setItem('token', this.token);
         }
+        if (response.data.usuario) {
+          localStorage.setItem('user', JSON.stringify(response.data.usuario));
+        }
         if (response.data?.usuario?.tipo === 'PRESTADOR') {
           this.router.navigate(['/servicos']);
         } else {
